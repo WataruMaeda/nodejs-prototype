@@ -6,7 +6,7 @@
 2. run `npm init`
 3. run `npm install express nodemon morgan --save`
 4. add `app.js`
-5. write code in `app.js
+5. write code in `app.js`
 
 i.e.
 ```
