@@ -1,28 +1,23 @@
+# Backend Basic
+
+## Procedure
+
+1. Create folder named your project
+2. run `npm init`
+3. run `npm install express nodemon morgan --save`
+4. add `app.js`
+5. write code in `app.js`
+
+i.e.
+```
 const express = require('express')
 const app = express()
 const morgan = require('morgan')
-const mysql = require('mysql')
 
 app.use(morgan('short'))
 
 app.get('/', (req, res) => {
-  res.send('Hello from Rooooooooot')
-})
-
-app.get('/user/:id', (req, res) => {
-  console.log('Fetch user with id: ', req.params.id);
-
-  const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    database: 'try-mysql-db'
-  })
-  
-  connection.query('SELECT * FROM users', (err, rows, fields) => {
-    console.log('fetch user successfuly')
-  })
-
-  res.end()
+  res.send('Hello from Root!')
 })
 
 app.get('/users', (req, res) => {
@@ -43,3 +38,7 @@ app.get('/users', (req, res) => {
 app.listen(3003, () => {
   console.log('Server is up and listening in 3003 ...')
 })
+
+```
+6. run `nodemon app.js`in terminal
+7. open `http://localhost:3003/` or `/users`
