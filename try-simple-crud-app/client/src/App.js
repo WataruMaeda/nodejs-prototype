@@ -1,28 +1,71 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import { Button, Input } from './components'
 
-class App extends Component {
+export default class App extends Component {
+  state = {
+    firstName: '',
+    lastName: '',
+    error: {}
+  }
+
+  handleInputChange = (event) => {
+    const { value, name } = event.target
+    const { errors } = this.state
+    errors[name] = null
+    this.setState({ [name]: value, errors })
+  }
+
+  handleSubmit = async (e) => {
+    e.preventDefault()
+
+    // TODO: validation
+  }
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <div style={styles.container}>
+        <div style={styles.contentsContainer}>
+          <Input
+            title="First Name"
+            value={''}
+            type="text"
+            name="firstName"
+            placeholder=""
+            onChange={this.handleInputChange}
+            error={''}
+          />
+          <Input
+            title="Last Name"
+            value={''}
+            type="text"
+            name="lastName"
+            placeholder=""
+            onChange={this.handleInputChange}
+            error={''}
+          />
+          <Button
+            title="Submit"
+            style={styles.button}
+            onClick={this.handleSubmit}
+          />
+        </div>
       </div>
     );
   }
 }
 
-export default App;
+const styles = {
+  container: {
+    flex: 1,
+    height: '100vh',
+  },
+  contentsContainer: {
+    margin: '10% 33%',
+  },
+  button: {
+    height: 60,
+    color: 'white',
+    background: 'orange',
+    margin: '50px 0 0',
+  }
+}
