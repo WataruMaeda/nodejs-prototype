@@ -1,24 +1,27 @@
 const MongoClient = require('mongodb').MongoClient;
 const assert = require('assert');
 
+// MARK: - Consts
+
 const url = 'mongodb://localhost:27017';
 const dbName = 'myproject';
 
-// Create a new MongoClient
-const client = new MongoClient(url,{ useNewUrlParser: true });
+// MARK: - Connect DB
 
-// Use connect method to connect to the Server
+const client = new MongoClient(url,{ useNewUrlParser: true });
 client.connect((err) => {
   assert.equal(null, err);
   console.log("Connected successfully to server");
 
   const db = client.db(dbName);
   insertDocuments(db, () => {
-
+    findDocuments(db, () => {
+      client.close();
+    });
   });
-
-  client.close();
 });
+
+// MARK: - Insert
 
 const insertDocuments = (db, callback) => {
   // Get the documents collection
@@ -31,7 +34,22 @@ const insertDocuments = (db, callback) => {
     assert.equal(3, result.result.n);
     assert.equal(3, result.ops.length);
     console.log("Inserted 3 documents into the collection");
+    console.log(result);
     callback(result);
+  });
+}
+
+// MARK: - Find
+
+const findDocuments = (db, callback) => {
+  // Get the documents collection
+  const collection = db.collection('documents');
+  // Find some documents
+  collection.find({}).toArray(function(err, docs) {
+    assert.equal(err, null);
+    console.log("Found the following records");
+    console.log(docs)
+    callback(docs);
   });
 }
 
