@@ -1,31 +1,39 @@
-const express = require('express')
-const app = express()
-const morgan = require('morgan')
+const MongoClient = require('mongodb').MongoClient;
+const assert = require('assert');
 
-app.use(morgan('short'))
+const url = 'mongodb://localhost:27017';
+const dbName = 'myproject';
 
-app.get('/', (req, res) => {
-  res.send('Hello from Rooooooooot')
-})
+// Create a new MongoClient
+const client = new MongoClient(url,{ useNewUrlParser: true });
 
-app.get('/users', (req, res) => {
-  const user1 = {
-    id: 1,
-    name: 'test-1',
-    message: 'Hello test 1 user'
-  }
+// Use connect method to connect to the Server
+client.connect((err) => {
+  assert.equal(null, err);
+  console.log("Connected successfully to server");
 
-  // res.json(user1)
+  const db = client.db(dbName);
+  insertDocuments(db, () => {
 
-  const user2 = {
-    id: 2,
-    name: 'test-2',
-    message: 'Hello test 2 user'
-  }
-  
-  res.json([user1, user2])
-})
+  });
 
-app.listen(3003, () => {
-  console.log('Server is up and listening in 3003 ...')
-})
+  client.close();
+});
+
+const insertDocuments = (db, callback) => {
+  // Get the documents collection
+  const collection = db.collection('documents');
+  // Insert some documents
+  collection.insertMany([
+    {a : 1}, {a : 2}, {a : 3}
+  ], (err, result) => {
+    assert.equal(err, null);
+    assert.equal(3, result.result.n);
+    assert.equal(3, result.ops.length);
+    console.log("Inserted 3 documents into the collection");
+    callback(result);
+  });
+}
+
+// *documentation
+// http://mongodb.github.io/node-mongodb-native/3.1/quick-start/quick-start/
