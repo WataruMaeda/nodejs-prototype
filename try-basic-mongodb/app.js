@@ -52,6 +52,3 @@ const findDocuments = (db, callback) => {
     callback(docs);
   });
 }
-
-// *documentation
-// http://mongodb.github.io/node-mongodb-native/3.1/quick-start/quick-start/
