@@ -8,3 +8,12 @@ export const postUser = async (name, age) => {
     return Promise.reject(err);
   }
 }
+
+export const getUsers = async () => {
+  try {
+    const res = await axios.get('/api/user');
+    return (res && res.data) ? res.data : Promise.reject(res);
+  } catch (err) {
+    return Promise.reject(err);
+  }
+}

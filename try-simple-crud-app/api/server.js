@@ -2,6 +2,7 @@ import express from 'express'
 import morgan from 'morgan'
 import mongoose from 'mongoose'
 import bodyParser from 'body-parser'
+
 import User from './user'
 
 const port = 3001
@@ -19,10 +20,7 @@ mongoose.connect(dbUrl, { useNewUrlParser: true }, dbErr => {
   // MARK: - POST
 
   app.post('/api/user', (req, res) => {
-    // console.log('receive POST request')
-    // console.log(req.body)
-    // res.status(200).send()
-
+    console.log('receive POST request')
     const { name, age } = req.body
     new User({
       name,
@@ -30,6 +28,15 @@ mongoose.connect(dbUrl, { useNewUrlParser: true }, dbErr => {
     }).save(err => {
       if (err) return res.status(500)
       res.status(200).send(`${name}(${age}) was successfully created.`)
+    })
+  })
+
+  // MARK: - GET
+
+  app.get('/api/user', (req, res) => {
+    User.find({}, (err, arr) => {
+      if (err) return res.status(500).send()
+      res.status(200).send(arr)
     })
   })
   
