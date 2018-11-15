@@ -1,4 +1,4 @@
-# Backend Basic
+# Basic CRUD App
 
 ## Docs
 
@@ -10,7 +10,7 @@
 
 1. Create folder named your project
 2. run `npm init`
-3. run `npm install express nodemon morgan  --save`
+3. run `npm install express nodemon morgan mongodb mongoose body-parser --save`
 4. add script in `package.json`
 
 i.e.
