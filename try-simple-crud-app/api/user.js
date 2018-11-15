@@ -1,13 +1,12 @@
-const mongoose = reruire('mongoose')
+const mongoose = require('mongoose')
 
 mongoose.Promise = global.Promise
 
 // create schema
 const schema = new mongoose.Schema({
-  firstName: String,
-  lastName: String,
+  name: String,
   age: Number,
 })
 
 // create model
-export default mongoose.model('Users', schema)
+export default mongoose.model('User', schema)

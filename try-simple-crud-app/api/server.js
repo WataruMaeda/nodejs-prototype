@@ -1,7 +1,8 @@
-const express = require('express')
-const morgan = require('morgan')
-const mongoose = require('mongoose')
-const bodyParser = require('body-parser')
+import express from 'express'
+import morgan from 'morgan'
+import mongoose from 'mongoose'
+import bodyParser from 'body-parser'
+import User from './user'
 
 const port = 3001
 const dbUrl = 'mongodb://localhost/crud' 
@@ -18,9 +19,18 @@ mongoose.connect(dbUrl, { useNewUrlParser: true }, dbErr => {
   // MARK: - POST
 
   app.post('/api/user', (req, res) => {
-    console.log('receive POST request')
-    console.log(req.body)
-    res.status(200).send()
+    // console.log('receive POST request')
+    // console.log(req.body)
+    // res.status(200).send()
+
+    const { name, age } = req.body
+    new User({
+      name,
+      age
+    }).save(err => {
+      if (err) return res.status(500)
+      res.status(200).send(`${name}(${age}) was successfully created.`)
+    })
   })
   
   app.listen(port, err => {
