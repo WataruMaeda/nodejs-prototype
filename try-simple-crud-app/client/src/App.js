@@ -58,9 +58,10 @@ const styles = {
   container: {
     flex: 1,
     height: '100vh',
+    background: '#001f4b'
   },
   contentsContainer: {
-    margin: '10% 33%',
+    padding: '10% 33%',
   },
   button: {
     height: 60,
