@@ -3,9 +3,9 @@ import { Button, Input } from './components'
 
 export default class App extends Component {
   state = {
-    firstName: '',
-    lastName: '',
-    error: {}
+    name: '',
+    age: '',
+    errors: {}
   }
 
   handleInputChange = (event) => {
@@ -15,33 +15,58 @@ export default class App extends Component {
     this.setState({ [name]: value, errors })
   }
 
+  validate = () => {
+    var errors = {}
+    var isError = false
+    
+    Object.keys(this.state).forEach(key => {
+
+      if (key === 'name' && this.state[key].length === 0) {
+        isError = true
+        errors[key] = 'Please input your name'
+      }
+
+      if (key === 'age' && this.state[key] === '') {
+        isError = true
+        errors[key] = 'Please input your age'
+      }
+    })
+
+    this.setState({ errors })
+    return isError
+  }
+
   handleSubmit = async (e) => {
     e.preventDefault()
-
-    // TODO: validation
+    const error = this.validate()
+    if (!error) {
+      // post request
+      
+    }
   }
 
   render() {
+    const { name, age, errors } = this.state
     return (
       <div style={styles.container}>
         <div style={styles.contentsContainer}>
           <Input
-            title="First Name"
-            value={''}
+            title="Nick Name"
+            value={name}
             type="text"
-            name="firstName"
+            name="name"
             placeholder=""
             onChange={this.handleInputChange}
-            error={''}
+            error={errors.name ? errors.name : ''}
           />
           <Input
-            title="Last Name"
-            value={''}
-            type="text"
-            name="lastName"
+            title="Age"
+            value={age}
+            type="number"
+            name="age"
             placeholder=""
             onChange={this.handleInputChange}
-            error={''}
+            error={errors.age ? errors.age : ''}
           />
           <Button
             title="Submit"
@@ -58,7 +83,6 @@ const styles = {
   container: {
     flex: 1,
     height: '100vh',
-    background: '#001f4b'
   },
   contentsContainer: {
     padding: '10% 33%',
@@ -66,7 +90,7 @@ const styles = {
   button: {
     height: 60,
     color: 'white',
-    background: 'orange',
+    background: '#0984e3',
     margin: '50px 0 0',
   }
 }
