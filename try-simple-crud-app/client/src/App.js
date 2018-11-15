@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Button, Input } from './components'
+import { postUser } from './Service'
 
 export default class App extends Component {
   state = {
@@ -18,7 +19,7 @@ export default class App extends Component {
   validate = () => {
     var errors = {}
     var isError = false
-    
+
     Object.keys(this.state).forEach(key => {
 
       if (key === 'name' && this.state[key].length === 0) {
@@ -41,7 +42,12 @@ export default class App extends Component {
     const error = this.validate()
     if (!error) {
       // post request
-      
+      const { name, age } = this.state
+      postUser(name, age).then(res => {
+        console.log('ok', res)
+      }).catch(e => {
+        console.log('failed', e)
+      })
     }
   }
 
