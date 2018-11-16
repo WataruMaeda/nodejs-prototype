@@ -20,6 +20,10 @@ export default class List extends Component {
           const { onClickAge } = this.props
           if (onClickAge) onClickAge(_id, age)
         }}>+1</button>
+        <button style={{ margin: '0 10px 0' }} onClick={() => {
+          const { onClickDelete } = this.props
+          if (onClickDelete) onClickDelete(_id)
+        }}>delete</button>
       </div>
     )
   }

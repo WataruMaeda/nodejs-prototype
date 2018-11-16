@@ -26,3 +26,16 @@ export const updateUser = async (id, age) => {
     return Promise.reject(err);
   }
 }
+
+export const deleteUser = async (id) => {
+  try {
+    const res = await axios({
+      method: 'delete',
+      url: '/api/user',
+      data: { id }
+    })
+    return (res && res.data) ? res.data : Promise.reject(res);
+  } catch (err) {
+    return Promise.reject(err);
+  }
+}

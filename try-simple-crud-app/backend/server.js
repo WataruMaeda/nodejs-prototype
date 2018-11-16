@@ -53,6 +53,20 @@ mongoose.connect(dbUrl, { useNewUrlParser: true }, dbErr => {
     })
   })
 
+  // MARK: - DELETE
+
+  app.delete('/api/user', (req, res) => {
+    const { id } = req.body
+    console.log('yeeeeaaaaa', id)
+    User.findByIdAndRemove(id, err => {
+      if (err) return res.status(500).send()
+      User.find({}, (findErr, arr) => {
+        if (findErr) return res.status(500).send()
+        res.status(200).send(arr)
+      })
+    })
+  })
+
   app.listen(port, err => {
     if (err) throw new Error(err)
     else console.log(`listening on port ${port}`)
