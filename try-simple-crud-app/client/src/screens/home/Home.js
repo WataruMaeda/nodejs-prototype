@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import { Button, Input } from './components'
-import { postUser, getUsers } from './Service'
-import userImg from './assets/user.svg'
+import { Button, Input } from '../../components'
+import { postUser, getUsers } from '../../service/User'
+import userImg from '../../assets/user.svg'
 
-export default class App extends Component {
+export default class Home extends Component {
   state = {
     name: '',
     age: '',
