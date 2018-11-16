@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { postUser, getUsers } from '../../service/User'
+import { postUser, getUsers, updateUser } from '../../service/User'
 import Form from './Form'
 import List from './List'
 
@@ -9,10 +9,10 @@ export default class Home extends Component {
   }
 
   componentWillMount() {
-    this.fetchUsers()
+    this.getUsers()
   }
 
-  fetchUsers = () => {
+  getUsers = () => {
     getUsers().then(users => {
       console.log('fetched users: ', users)
       this.setState({ users })
@@ -21,19 +21,30 @@ export default class Home extends Component {
     })
   }
 
+  postUser = (name, age) => {
+    postUser(name, age).then(res => {
+      console.log('post success: ', res)
+      this.getUsers()
+    }).catch(e => {
+      console.log('post failed', e)
+    })
+  }
+
+  updateUser = (id, age) => {
+    updateUser(id, age).then(users => {
+      console.log('update user: ', users)
+      this.setState({ users })
+    }).catch(e => {
+      console.log('failed update user', e)
+    })
+  }
+
   render() {
     const { users } = this.state
     return (
       <div style={styles.container}>
-        <Form onClickSubmit={(name, age) => {
-          postUser(name, age).then(res => {
-            console.log('post success: ', res)
-            this.fetchUsers()
-          }).catch(e => {
-            console.log('post failed', e)
-          })
-        }} />
-        {users.length > 0 && <List users={users} /> }
+        <Form onClickSubmit={this.postUser} />
+        <List users={users} onClickAge={this.updateUser}/>
       </div>
     );
   }

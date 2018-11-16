@@ -6,16 +6,20 @@ export default class List extends Component {
     users: this.props.users ? this.props.users : [],
   }
 
-  componentWillReceiveProps() {
-    const { users } = this.props
+  componentWillReceiveProps(nextProps) {
+    const { users } = nextProps
     if (users) this.setState({ users })
   }
 
-  renderUser = ({ name, age }) => {
+  renderUser = ({ _id, name, age }) => {
     return (
-      <div style={styles.userContainer}>
+      <div style={styles.userContainer} key={_id}>
         <img src={userImg} style={styles.profImg} alt="user"/>
         <div style={styles.user}>{`${name} (${age})`}</div>
+        <button style={{ margin: '0 10px 0' }} onClick={() => {
+          const { onClickAge } = this.props
+          if (onClickAge) onClickAge(_id, age)
+        }}>+1</button>
       </div>
     )
   }

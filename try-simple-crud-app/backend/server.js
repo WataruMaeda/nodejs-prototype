@@ -40,6 +40,19 @@ mongoose.connect(dbUrl, { useNewUrlParser: true }, dbErr => {
     })
   })
   
+  // MARK: - PUT
+
+  app.put('/api/user', (req, res) => {
+    const { id } = req.body
+    User.findByIdAndUpdate(id, { $inc: { "age": 1 } }, err => {
+      if (err) return res.status(500).send()
+      User.find({}, (findErr, arr) => {
+        if (findErr) return res.status(500).send()
+        res.status(200).send(arr)
+      })
+    })
+  })
+
   app.listen(port, err => {
     if (err) throw new Error(err)
     else console.log(`listening on port ${port}`)

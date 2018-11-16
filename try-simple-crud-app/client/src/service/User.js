@@ -17,3 +17,12 @@ export const getUsers = async () => {
     return Promise.reject(err);
   }
 }
+
+export const updateUser = async (id, age) => {
+  try {
+    const res = await axios.put('/api/user', { id });
+    return (res && res.data) ? res.data : Promise.reject(res);
+  } catch (err) {
+    return Promise.reject(err);
+  }
+}
