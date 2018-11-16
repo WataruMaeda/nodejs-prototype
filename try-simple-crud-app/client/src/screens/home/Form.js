@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import { Button, Input } from '../../components'
-import { postUser, getUsers } from '../../service/User'
-import userImg from '../../assets/user.svg'
 
 export default class Form extends Component {
   state = {
@@ -51,6 +49,7 @@ export default class Form extends Component {
     const { name, age, errors } = this.state
     return (
       <div style={styles.container}>
+        <h1>Input</h1>
         <Input
           title="Name"
           value={name}
@@ -82,7 +81,7 @@ export default class Form extends Component {
 const styles = {
   container: {
     flex: 1,
-    padding: '10% 10%',
+    padding: '2% 10%',
     borderLeft: `1px solid lightGray`,
   },
   button: {
