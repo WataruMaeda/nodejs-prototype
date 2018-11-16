@@ -71,8 +71,7 @@ export default class App extends Component {
     return (
       <div style={styles.userContainer}>
         <img src={userImg} style={styles.profImg}/>
-        <div>{name}</div>
-        <div>{age}</div>
+        <div style={styles.user}>{`${name} (${age})`}</div>
       </div>
     )
   }
@@ -127,7 +126,6 @@ const styles = {
     borderLeft: `1px solid lightGray`,
   },
   userContainer: {
-    margin: '0 10%',
     padding: 20,
     display: 'flex',
     flexDirection: 'row',
@@ -147,5 +145,9 @@ const styles = {
     margin: 10,
     width: 60,
     height: 60,
+  },
+  user: {
+    fontSize: 18,
+    color: '#556180',
   }
 }
