@@ -1,38 +1,3 @@
-# MongoDB Basic
-
-## Docs
-
-- [MongoDB doc](http://mongodb.github.io/node-mongodb-native/3.1/quick-start/quick-start/)
-- [Mongoose](https://mongoosejs.com/docs/index.html)
-
-## Procedure
-
-1. Create folder named your project and cd /your-project-name
-2. run `npm init`
-3. run `npm install express nodemon morgan babel-cli babel-preset-es2015 body-parser mongodb, mongoose --save`
-4. run `touch .babelrc` and write code
-```
-{
-  "presets" : ["es2015"],
-}
-```
-5. run `touch user.js` to add schema and write code
-````
-import mongoose from 'mongoose'
-
-mongoose.Promise = global.Promise
-
-// create schema
-const schema = new mongoose.Schema({
-  name: String,
-  age: Number,
-})
-
-// create model
-export default mongoose.model('User', schema)
-````
-5. run `touch server.js` and write code
-```
 import express from 'express'
 import morgan from 'morgan'
 import mongoose from 'mongoose'
@@ -106,13 +71,3 @@ mongoose.connect(dbUrl, { useNewUrlParser: true }, dbErr => {
     else console.log(`listening on port ${port}`)
   })
 })
-
-```
-6. go to `package.json` and add start spcipt
-```
-  "scripts": {
-    "start": "nodemon --exec babel-node server.js"
-  },
-```
-7. run `npm start`in terminal
-8. open `http://localhost:3001/` and try get `{host}/api/user` to see the response
