@@ -22,11 +22,12 @@ mongoose.connect(dbUrl, { useNewUrlParser: true }, dbErr => {
   app.post('/api/user', (req, res) => {
     console.log('receive POST request')
     const { name, age } = req.body
+    if (!name || !age) return res.status(400).send('cannot')
     new User({
       name,
       age
     }).save(err => {
-      if (err) return res.status(500)
+      if (err) return res.status(500).send()
       res.status(200).send(`${name}(${age}) was successfully created.`)
     })
   })
