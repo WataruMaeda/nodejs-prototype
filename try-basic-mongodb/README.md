@@ -116,4 +116,4 @@ mongoose.connect(dbUrl, { useNewUrlParser: true }, dbErr => {
 ```
 7. run `npm start`in terminal
 8. open `http://localhost:3001/` and try get `{host}/api/user` to see the response
-You can check the response with [Advanced REST client](https://chrome.google.com/webstore/detail/advanced-rest-client/hgmloofddffdnphfgcellkdfbfbjeloo) 
+You can check the response with [Advanced REST client](https://install.advancedrestclient.com) 
