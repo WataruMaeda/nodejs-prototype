@@ -1,0 +1,31 @@
+.btn-primary {
+  font-family: var(--font-primary);
+  background-color: var(--color-blue-light);
+  border: none;
+  color: white;
+  text-align: center;
+}
+
+.btn-primary:hover {
+  transition: 0.3s;
+  background-color: var(--color-blue-reguler);
+}
+
+.btn-secondary {
+  font-family: var(--font-primary);
+  background-color: var(--color-gray-dark);
+  border: none;
+  color: white;
+  text-align: center;
+  opacity: 0.6;
+}
+
+.btn-secondary:hover {
+  opacity: 1;
+  transition: 0.3s;
+  background-color: var(--color-blue-reguler);
+}
+
+div {
+  white-space: pre-wrap;
+}
