@@ -1,3 +1,6 @@
+# Config
+client/src/service/Config.js
+
 # Logs
 logs
 *.log
